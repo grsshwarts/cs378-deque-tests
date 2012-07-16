@@ -1414,6 +1414,20 @@ struct TestDeque : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(d.empty());
 	}
 
+	void test_erase_7() {
+		C d;
+		for (int i = 0; i < 5; ++i)
+			d.push_back(i);
+		CPPUNIT_ASSERT(d.size() == 5);
+		CPPUNIT_ASSERT(d.back() == 4);
+
+		typename C::iterator it = d.erase(d.end());
+		CPPUNIT_ASSERT(d.size() == 4);
+		CPPUNIT_ASSERT(d.back() == 3);
+		CPPUNIT_ASSERT(*(d.end() - 1) == 3);
+		CPPUNIT_ASSERT(it == d.end() + 1);
+	}
+
 	// front() tests included in back() tests above
 
 	//------------
@@ -1948,6 +1962,7 @@ struct TestDeque : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_erase_4);
 	CPPUNIT_TEST(test_erase_5);
 	CPPUNIT_TEST(test_erase_6);
+	CPPUNIT_TEST(test_erase_7);
 	CPPUNIT_TEST(test_insert_1);
 	CPPUNIT_TEST(test_insert_2);
 	CPPUNIT_TEST(test_insert_3); 
